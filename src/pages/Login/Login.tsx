@@ -4,6 +4,7 @@ import "./Login.css"
 export default function Login() {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [errors, setErrors] = useState<{}>({ email: "", password: "" });
 
     function login(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();

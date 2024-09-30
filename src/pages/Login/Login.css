@@ -1,0 +1,31 @@
+h1 {
+    margin: 0;
+    margin-bottom: 24px;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 380px;
+    background-color: var(--bg-sec);
+    padding: 25px 25px;
+    border-radius: 6px;
+}
+
+.field {
+    margin-bottom: 16px;
+}
+
+.field input {
+    width: 100%;
+    margin-top: 5px;
+}
