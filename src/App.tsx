@@ -1,35 +1,49 @@
-import React, { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useContext } from "react";
+import { ProfileContext, ProfileProvider } from "./context/ProfileContext";
 
-function App () {
-  const [count, setCount] = useState(0)
+import {
+    BrowserRouter as Router,
+    Route,
+    Routes,
+    Navigate
+} from "react-router-dom";
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Profile from "./pages/Profile/Profile";
+
+export default function App() {
+    const { profile, loading } = useContext(ProfileContext);
+
+    return (
+        <ProfileProvider>
+            <ProfileContext.Consumer>
+                {({ loading, profile }) => (
+                    loading ?
+                        <div>Loading...</div> : (
+                            <Router>
+                                <Routes>
+
+                                    <Route
+                                        path="/"
+                                        element={profile ? <Home /> : <Navigate to="/login" />}
+                                    />
+
+                                    <Route
+                                        path="/login"
+                                        element={profile ? <Navigate to="/" /> : <Login />}
+                                    />
+
+                                    <Route
+                                        path="/profile"
+                                        element={profile ? <Profile /> : <Navigate to="/login" />}
+                                    />
+
+                                </Routes>
+                            </Router>
+                        )
+                )}
+            </ProfileContext.Consumer>
+        </ProfileProvider>
+    );
 }
-
-export default App

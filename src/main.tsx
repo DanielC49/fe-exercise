@@ -1,21 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom"
 import './index.css'
-import Login from "./pages/Login/Login"
+import App from "./App";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />,
-  },
-]);
+const isLoggedIn = !!localStorage.getItem("accountId");
 
 ReactDOM.createRoot(document.getElementById('root') as ReactDOM.Container).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <App />
   </React.StrictMode>
 )
