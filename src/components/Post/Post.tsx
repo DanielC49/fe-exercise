@@ -1,5 +1,6 @@
 import { Profile } from "../../context/ProfileContext";
 import Avatar from "../Avatar/Avatar";
+
 import "./Post.css";
 
 export interface PostType {
@@ -13,7 +14,7 @@ export interface PostType {
 export default function Post({ post }: { post: PostType }) {
     return <div className="post-container">
         <div className="post-header">
-            <Avatar src={"../../public/avatars/" + post.user.avatar} />
+            <Avatar src={"/avatars/" + post.user.avatar} />
             {post.user.firstName + " " + post.user.lastName}
         </div>
         <div>

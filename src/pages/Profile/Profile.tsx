@@ -5,6 +5,7 @@ import { ProfileContext } from "../../context/ProfileContext";
 import "./Profile.css";
 import PostList from "../../components/PostList/PostList";
 import { PostType } from "../../components/Post/Post";
+import Header from "../../components/Header/Header";
 
 export default function Profile() {
     const { profile } = useContext(ProfileContext);
@@ -25,11 +26,12 @@ export default function Profile() {
         });
     }, []);
 
-    return (
-        isLoading ? <div>Loading...</div> : (
+    return <>
+        <Header />
+        {isLoading ? <div>Loading...</div> : (
             <div className="main">
                 <div className="top">
-                    <Avatar large={true} src={"../../public/avatars/" + profile.avatar} />
+                    <Avatar large={true} src={"/avatars/" + profile.avatar} />
                     <div>
                         <div className="name">{profile.firstName + " " + profile.lastName}</div>
                         <div className="email">{profile.email}</div>
@@ -38,6 +40,6 @@ export default function Profile() {
                 <h2>Posts ({posts.length})</h2>
                 <PostList posts={posts} />
             </div>
-        )
-    );
+        )}
+    </>;
 }

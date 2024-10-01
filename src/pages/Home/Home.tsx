@@ -3,6 +3,8 @@ import PostList from "../../components/PostList/PostList";
 import { PostType } from "../../components/Post/Post";
 import Header from "../../components/Header/Header";
 
+import "./Home.css";
+
 export default function Home() {
     const [posts, setPosts] = useState<Array<PostType>>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,7 +21,7 @@ export default function Home() {
 
     return <>
         <Header />
-        <div className="main">
+        <div className="main posts">
             <PostList posts={posts} />
         </div>
     </>;

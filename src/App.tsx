@@ -26,12 +26,12 @@ export default function App() {
 
                                     <Route
                                         path="/"
-                                        element={profile ? <Home /> : <Navigate to="/login" />}
+                                        element=<Home />
                                     />
 
                                     <Route
                                         path="/login"
-                                        element={profile ? <Navigate to="/" /> : <Login />}
+                                        element={profile ? <Navigate to="/profile" /> : <Login />}
                                     />
 
                                     <Route
