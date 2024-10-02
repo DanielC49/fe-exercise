@@ -13,11 +13,51 @@
 .post-header {
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: space-between;
     margin-bottom: 12px;
+}
+
+.post-header-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .post-title {
     font-weight: bold;
     font-size: 1.2rem;
+}
+
+.ago {
+    color: var(--sec);
+    font-size: 14px;
+}
+
+.post-container .post-options{
+    visibility: hidden;
+}
+
+.post-container:hover .post-options{
+    visibility: visible;
+}
+
+.post-header-button {
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-header-button>span{
+    font-size: 20px;
+}
+
+.post-badge {
+    padding: 3px 10px;
+    border-radius: 25px;
+    background-color: var(--accent);
+    color: white;
+    font-size: 14px;
 }

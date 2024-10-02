@@ -31,4 +31,5 @@ form {
 .error-msg {
     color: #ff9393;
     font-weight: bold;
+    margin-top: 5px;
 }

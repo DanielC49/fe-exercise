@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ProfileContext, ProfileProvider } from "./context/ProfileContext";
 
 import {
@@ -12,8 +12,20 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
 
+export interface EditPostType {
+    id: string;
+    title: string;
+    content: string;
+}
+
 export default function App() {
-    const { profile, loading } = useContext(ProfileContext);
+    const [postModalOpen, setPostModalOpen] = useState<boolean>(false);
+    const [editPost, setEditPost] = useState<null | EditPostType>(null);
+
+    function setModalEditPost(postData: null | EditPostType): void {
+        setPostModalOpen(true);
+        setEditPost(postData);
+    }
 
     return (
         <ProfileProvider>
@@ -26,7 +38,7 @@ export default function App() {
 
                                     <Route
                                         path="/"
-                                        element=<Home />
+                                        element=<Home editPost={editPost} setModalEditPost={setModalEditPost} isOpen={postModalOpen} setOpen={setPostModalOpen} />
                                     />
 
                                     <Route
@@ -36,7 +48,7 @@ export default function App() {
 
                                     <Route
                                         path="/profile"
-                                        element={profile ? <Profile /> : <Navigate to="/login" />}
+                                        element={profile ? <Profile editPost={editPost} setModalEditPost={setModalEditPost} isOpen={postModalOpen} setOpen={setPostModalOpen} /> : <Navigate to="/login" />}
                                     />
 
                                 </Routes>

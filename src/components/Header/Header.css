@@ -45,3 +45,12 @@
 .header-logo>a:hover {
     color: var(--sec);
 }
+
+.post-button{
+    display: flex;
+    gap: 8px;
+}
+
+.post-button>span {
+    font-size: 20px;
+}

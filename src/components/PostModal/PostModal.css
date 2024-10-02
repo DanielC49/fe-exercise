@@ -1,0 +1,69 @@
+.modal-bg {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100vw;
+    height: 100vh;
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.post-modal {
+    width: 560px;
+    z-index: 100;
+    background-color: var(--bg-sec);
+    border-radius: 4px;
+    padding: 25px 30px;
+}
+
+.fade-out {
+    transform: scale(1.05);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.2s, opacity 0.2s, visibility 0.2s;
+}
+
+.fade-in {
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+    transition: transform 0.2s, opacity 0.2s, visibility 0.2s;
+
+}
+
+textarea {
+    width: 100%;
+    margin-top: 6px;
+}
+
+.post-modal-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.close-post-modal {
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.char-count {
+    float: right;
+    color: var(--sec);
+}
+
+.field-error {
+    color: #ff9393;
+}
+
+.field-error>input {
+    border-color: #ff9393;
+}
