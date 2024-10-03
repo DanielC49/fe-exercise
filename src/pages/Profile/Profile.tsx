@@ -10,9 +10,13 @@ import { EditPostType } from "../../App";
 import { Navigate } from "react-router-dom";
 
 export default function Profile({ setOpen, isOpen, setModalEditPost, editPost }: {
+    // Sets whether the publish post modal is open or not.
     setOpen: (value: React.SetStateAction<boolean>) => void,
+    // Whether the publish post modal is open.
     isOpen: boolean,
+    // Open modal to edit post with initial post data.
     setModalEditPost: (postData: null | EditPostType) => void,
+    // Data of the post to be edited, or null if no post is being edited.
     editPost: null | EditPostType
 }) {
     const { profile } = useContext(ProfileContext);
@@ -23,26 +27,33 @@ export default function Profile({ setOpen, isOpen, setModalEditPost, editPost }:
     if (!profile)
         return <Navigate to="/login" />;
 
+    // Initial load of posts.
     useEffect(() => {
-        postUpdated();
+        loadPosts();
     }, []);
 
-    function postUpdated() {
+    /**
+     * Fetches and loads the profile's posts in chronological order.
+     */
+    function loadPosts() {
         if (!profile) return;
 
-        fetch(`http://localhost:5000/posts?userId=${profile.id}&_embed=user`).then(res => res.json()).then((result: Array<PostType>) => {
-            setPosts(result);
-            setIsLoading(false);
-        }).catch(err => {
-            setIsLoading(false);
-            console.error(err);
-        });
+        fetch(`http://localhost:5000/posts?userId=${profile.id}&_embed=user`)
+            .then(res => res.json())
+            .then((result: Array<PostType>) => {
+                setPosts(result);
+                setIsLoading(false);
+            }).catch(err => {
+                setIsLoading(false);
+                console.error(err);
+            });
     }
 
     return <>
-        <Header postUpdated={postUpdated} editPost={editPost} isOpen={isOpen} setModalEditPost={setModalEditPost} setOpen={setOpen} />
+        <Header loadPosts={loadPosts} editPost={editPost} isOpen={isOpen} setModalEditPost={setModalEditPost} setOpen={setOpen} />
         {isLoading ? <div>Loading...</div> : (
             <div className="main pb">
+                {/* Profile avatar, name and e-mail */}
                 <div className="top">
                     <Avatar large={true} src={"/avatars/" + profile.avatar} />
                     <div>
@@ -50,8 +61,10 @@ export default function Profile({ setOpen, isOpen, setModalEditPost, editPost }:
                         <div className="email">{profile.email}</div>
                     </div>
                 </div>
+
+                {/* Profile posts */}
                 <h2>Posts ({posts.length})</h2>
-                <PostList postUpdated={postUpdated} setModalEditPost={setModalEditPost} posts={posts} />
+                <PostList loadPosts={loadPosts} setModalEditPost={setModalEditPost} posts={posts} />
             </div>
         )}
     </>;

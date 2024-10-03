@@ -15,23 +15,31 @@ export default function Login() {
     async function login(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
+        // Get errors
         const err = getError();
         setError(err);
 
         if (err)
             return;
 
-        const accounts: Array<any> = await (fetch(`http://localhost:5000/users?email=${email}&password=${password}`).then(res => res.json()));
-
-        if (accounts.length == 1) {
-            localStorage.setItem("accountId", accounts[0].id);
-            setProfile(await getProfile());
-            setDone(true);
-        } else {
-            setError("E-mail or password is incorrect.");
-        }
+        // Fetch and set profile
+        fetch(`http://localhost:5000/users?email=${email}&password=${password}`)
+            .then(res => res.json())
+            .then(async (accounts: Array<any>) => {
+                if (accounts.length == 1) { // Profile exists
+                    localStorage.setItem("accountId", accounts[0].id);
+                    setProfile(await getProfile());
+                    setDone(true);
+                } else { // Profile doesn't exist
+                    setError("E-mail or password is incorrect.");
+                }
+            });
     }
 
+    /**
+     * Gets the current error.
+     * @returns A string containing the error, or an empty string if there is no error.
+     */
     function getError(): string {
         if (email === "")
             return "Please enter an e-mail."
@@ -47,22 +55,32 @@ export default function Login() {
             <div className="container">
                 <h1 className="title">Login</h1>
                 <form onSubmit={login}>
+
+                    {/* E-mail */}
                     <div className="field">
-                        <label htmlFor="email">
+                        <label>
                             <div>E-mail</div>
                             <input value={email} onChange={e => setEmail(e.target.value)} type="email" />
                         </label>
                     </div>
+
+                    {/* Password */}
                     <div className="field">
-                        <label htmlFor="password">
+                        <label>
                             <div>Password</div>
                             <input value={password} onChange={e => setPassword(e.target.value)} type="password" />
                         </label>
                     </div>
+
+                    {/* Error message */}
                     <div className="error-msg">{error}</div>
+
+                    {/* Login button */}
                     <button type="submit">Login</button>
+
                 </form>
             </div>
+            {/* Go to profile page when login is sucessful */}
             {done && <Navigate to="/profile" />}
         </div>
     </>

@@ -36,16 +36,19 @@ export default function App() {
                             <Router>
                                 <Routes>
 
+                                    // Home page
                                     <Route
                                         path="/"
                                         element=<Home editPost={editPost} setModalEditPost={setModalEditPost} isOpen={postModalOpen} setOpen={setPostModalOpen} />
                                     />
 
+                                    //  Login page
                                     <Route
                                         path="/login"
                                         element={profile ? <Navigate to="/profile" /> : <Login />}
                                     />
 
+                                    // Profile page
                                     <Route
                                         path="/profile"
                                         element={profile ? <Profile editPost={editPost} setModalEditPost={setModalEditPost} isOpen={postModalOpen} setOpen={setPostModalOpen} /> : <Navigate to="/login" />}
