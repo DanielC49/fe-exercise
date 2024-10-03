@@ -94,8 +94,8 @@ export default function Post({ post, setModalEditPost, loadPosts }: {
                 </button>
 
                 {/* Delete post button */}
-                <button className="post-header-button">
-                    <span onClick={() => deletePost(post.id)} className="material-symbols-outlined">delete</span>
+                <button onClick={() => deletePost(post.id)} className="post-header-button">
+                    <span className="material-symbols-outlined">delete</span>
                 </button>
 
             </div>}

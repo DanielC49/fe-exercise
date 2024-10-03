@@ -48,6 +48,6 @@ export default function Header({ setOpen, isOpen, setModalEditPost, editPost, lo
             </div>
         </div>
         {/* Publish post modal */}
-        {postUpdated && setOpen && editPost && isOpen && <PostModal postUpdated={postUpdated} setOpen={setOpen} isOpen={isOpen} editPost={editPost} />}
+        {postUpdated && setOpen && editPost !== undefined && isOpen && <PostModal postUpdated={postUpdated} setOpen={setOpen} isOpen={isOpen} editPost={editPost} />}
     </>;
 }
